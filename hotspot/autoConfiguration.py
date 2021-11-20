@@ -202,8 +202,8 @@ class autoHotspot:
     def hotspotDhcpServer(self):
         dhcpNetwork = self.api.path('ip','dhcp-server','network')
         dhcpNetwork.add(
-            address = ipRemote.replace(ipRemote.split(".")[3], "0/24"),
-            gateway = ipRemote.replace(ipRemote.split(".")[3], "1")
+            address = self.ipRemote.replace(self.ipRemote.split(".")[3], "0/24"),
+            gateway = self.ipRemote.replace(self.ipRemote.split(".")[3], "1")
         )
         
     def run(self):
