@@ -1,0 +1,1 @@
+from hotspot.autoConfiguration import
