@@ -224,7 +224,7 @@ class autoHotspot:
             self.hotspotServer()
             self.hotspotDefautlUsers()
             self.hotspotDhcpServer()
-            print("\n\nHotspot Berhasil Dibuat,...! :v\n\nUser Default : admin\nPassword: mbingsdk\n\n")
+            print("\n\nHotspot Berhasil Dibuat,...! :v\n\nUser Default : , self.defaultUsername, \nPassword: , self.defaultPassword, \n\n")
             time.sleep(3)
         else:
             print("\n\nFailed,...! :v\n\n")
