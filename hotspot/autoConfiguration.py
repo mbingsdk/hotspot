@@ -209,7 +209,7 @@ class autoHotspot:
         )
         
     def run(self):
-        pa = input("Masukkan kode: ")
+        #pa = input("Masukkan kode: ")
         #if str(pa) == "mbing":
         self.auth()
         self.checkEther()
