@@ -5,10 +5,10 @@ import time
 from librouteros import connect
 
 class autoHotspot:
-    def __init__(self, user, password, ipModem, port, ipClient, ipRemote, ipHotspot, ipDNS, domain):
+    def __init__(self, user, password, ipRemoteGateway, port, ipClient, ipRemote, ipHotspot, ipDNS, domain):
         self.user = user
         self.password = password
-        self.ipModem = ipModem
+        self.ipRemoteGateway = ipRemoteGateway
         self.ipClient = ipClient
         self.port = port
         self.ipRemote = ipRemote
@@ -24,7 +24,7 @@ class autoHotspot:
 
     def auth(self):
         try:
-            self.api = connect(username = self.user, password = self.password, host = self.ipRemote.replace(self.ipRemote.split(".")[3], "1"), port = self.port)
+            self.api = connect(username = self.user, password = self.password, host = self.ipRemoteGateway, port = self.port)
             return self.api
         except Exception as asu:
             print(asu)
