@@ -1,7 +1,7 @@
 # Konfigurasi Mikrotik Hotspot Server
 # by MbingSDK
 # Leave me here...
-
+import time
 from librouteros import connect
 
 class autoHotspot:
@@ -24,7 +24,7 @@ class autoHotspot:
 
     def auth(self):
         try:
-            self.api = connect(username = self.user, password = self.password, host = self.ipModem, port = self.port)
+            self.api = connect(username = self.user, password = self.password, host = self.ipRemote.replace(self.ipRemote.split(".")[3], "1"), port = self.port)
             return self.api
         except Exception as asu:
             print(asu)
@@ -187,6 +187,10 @@ class autoHotspot:
             password = self.defaultPassword
         )
 
+    def remoteDhcpServer(self):
+        dhcp = self.api.path('ip','dhcp-server')
+        tuple(dhcp)
+
         dhcpID = dhcp.add(
             name = "Dhcp-Remote",
             interface = self.ether[1]
@@ -198,8 +202,6 @@ class autoHotspot:
             'add-arp':True,
             'disabled':False
         })
-
-    def hotspotDhcpServer(self):
         dhcpNetwork = self.api.path('ip','dhcp-server','network')
         dhcpNetwork.add(
             address = self.ipRemote.replace(self.ipRemote.split(".")[3], "0/24"),
@@ -223,7 +225,7 @@ class autoHotspot:
             self.hotspotProfile()
             self.hotspotServer()
             self.hotspotDefautlUsers()
-            self.hotspotDhcpServer()
+            self.remoteDhcpServer()
             print("\n\nHotspot Berhasil Dibuat,...! :v\n\nUser Default : , self.defaultUsername, \nPassword: , self.defaultPassword, \n\n")
             time.sleep(3)
         else:
