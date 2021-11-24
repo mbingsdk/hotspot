@@ -1,3 +1,4 @@
+#Module
 from hotspot.autoConfiguration import *
 
 # Data
