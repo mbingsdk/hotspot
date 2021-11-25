@@ -18,6 +18,8 @@ class autoHotspot:
         self.ether = []
         self.etherLenght = 0
         self.api = None
+        self.sntpDNS = "id.pool.ntp.org"
+        self.timez = "Asia/Makassar"
         self.bridge = "hotspot"
         self.defaultUsername = "admin"
         self.defaultPassword = "mbingsdk"
@@ -187,6 +189,22 @@ class autoHotspot:
             password = self.defaultPassword
         )
 
+    def settingSNTP(self):
+        sntp = self.api.path("system","ntp","client")
+        tuple(sntp)
+        sntp.update(**{
+            'enable':True,
+            'server-dns-names':self.sntpDNS
+        })
+
+    def settingTimeZone(self):
+        clock = self.api.path("system","clock")
+        tuple(clock)
+        clock.update(**{
+            'time-zone-autodetect':False,
+            'time-zone-name':self.timez
+        })
+
     def remoteDhcpServer(self):
         dhcp = self.api.path('ip','dhcp-server')
         tuple(dhcp)
@@ -225,8 +243,10 @@ class autoHotspot:
         self.hotspotProfile()
         self.hotspotServer()
         self.hotspotDefautlUsers()
+        self.settingSNTP()
+        self.settingTimeZone()
         self.remoteDhcpServer()
-        print("\n\nHotspot Berhasil Dibuat,...! :v\n\nUser Default : , self.defaultUsername, \nPassword: , self.defaultPassword, \n\n")
+        print("\n\nHotspot Berhasil Dibuat,...! :v\n\nUser Default : ", self.defaultUsername, "\nPassword: ", self.defaultPassword, "\n\n")
         #time.sleep(3)
         #else:
         #print("\n\nFailed,...! :v\n\n")
