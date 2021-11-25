@@ -193,7 +193,7 @@ class autoHotspot:
         sntp = self.api.path("system","ntp","client")
         tuple(sntp)
         sntp.update(**{
-            'enable':True,
+            'enabled':True,
             'server-dns-names':self.sntpDNS
         })
 
